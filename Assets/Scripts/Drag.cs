@@ -1,18 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private float distance = 10;
+
+    [SerializeField] private Camera introCamera;
+
+    private void Start()
     {
-        
+        if (introCamera)
+            distance = Vector3.Distance(transform.position, introCamera.transform.position);
+        else
+            Debug.LogError("No camera has been found.");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDrag()
     {
-        
+        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
+        Vector3 objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        transform.position = objPosition;
     }
 }
