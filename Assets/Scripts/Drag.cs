@@ -12,7 +12,7 @@ public class Drag : MonoBehaviour
         if (introCamera)
             distance = Vector3.Distance(transform.position, introCamera.transform.position);
         else
-            Debug.LogError("No camera has been found.");
+            Debug.LogError("No camera was found.");
     }
 
     private void OnMouseDrag()
