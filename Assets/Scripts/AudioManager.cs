@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
         Sound sound;
 
         if (isMusic)
-            sound = music.Find(s => s.soundName == name);
+            sound = music.Find(s => s.soundName == name); // TODO: stop playing previous track?
         else
             sound = sounds.Find(s => s.soundName == name);
 
