@@ -4,10 +4,9 @@ using UnityEngine.EventSystems;
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private float distance;
-    private GameObject itemBeingDragged;
-    private Vector3 startPosition;
     private Vector3 mousePosition;
     private Vector3 objPosition;
+    private Vector3 startPosition;
 
     private void Start()
     {
@@ -16,7 +15,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemBeingDragged = gameObject;
         startPosition = transform.position;
     }
 
@@ -29,8 +27,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        itemBeingDragged = null;
-
         if (transform.position.x > -0.05)
             transform.position = startPosition;
         else
