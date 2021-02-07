@@ -1,13 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private float distance;
-    [SerializeField] private Rigidbody rb;
     private Vector3 mousePosition;
     private Vector3 objPosition;
     private Vector3 startPosition;
+
+    [SerializeField] private FallingPhaseHandler fallingPhaseHandler;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private UnityEvent prepareFallingPhase;
+
+    private void Awake()
+    {
+        if (!rb)
+            Debug.LogError("No Rigidbody referenced in the script.");
+    }
 
     private void Start()
     {
@@ -36,9 +46,15 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
         else
         {
-            rb.constraints &= ~RigidbodyConstraints.FreezePositionY; // Unfreezing the Y position
-            this.enabled = false;
+            DoEndDragFalling();
         }
         Debug.Log("OnEndDrag");
+    }
+
+    private void DoEndDragFalling()
+    {
+        prepareFallingPhase?.Invoke();
+
+        this.enabled = false;
     }
 }
