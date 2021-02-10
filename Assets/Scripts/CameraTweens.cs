@@ -8,6 +8,13 @@ public class CameraTweens : MonoBehaviour
     [SerializeField] private Transform firstTransform;
     [SerializeField] private Transform secondTransform;
 
+    private void Awake()
+    {
+        if (!playerP) Debug.LogWarning("No player prefab referenced.");
+        if (!firstTransform) Debug.LogWarning("No first Transform referenced.");
+        if (!secondTransform) Debug.LogWarning("No second Transform referenced.");
+    }
+
     public void SetFallingPosition()
     {
         transform.DOMove(firstTransform.position, 2).Play();

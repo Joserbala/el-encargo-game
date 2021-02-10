@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-using System;
 
 public class FallingPhaseHandler : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class FallingPhaseHandler : MonoBehaviour
     private Vector3 vVector;
     private Vector3 movementVector;
 
-    [SerializeField] private IntVariableSO fallingSpeed;
     [SerializeField] private float glidingSpeed = 10;
+    [SerializeField] private IntVariableSO fallingSpeed;
     [SerializeField] private string horizontalAxis = "Horizontal";
     [SerializeField] private string verticalAxis = "Vertical";
     [SerializeField] private Rigidbody rb;
@@ -22,8 +21,7 @@ public class FallingPhaseHandler : MonoBehaviour
 
     private void Awake()
     {
-        if (!rb)
-            Debug.LogError("No Rigidbody referenced in the script.");
+        if (!rb) Debug.LogWarning("No Rigidbody referenced.");
     }
 
     private void Update()

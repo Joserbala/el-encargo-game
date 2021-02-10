@@ -12,6 +12,11 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private string yAxis = "Mouse Y";
     [SerializeField] private Transform head;
 
+    private void Awake()
+    {
+        if (!head) Debug.LogWarning("No Transform for head referenced.");
+    }
+
     private void Start()
     {
         Cursor.visible = false;

@@ -15,8 +15,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void Awake()
     {
-        if (!rb)
-            Debug.LogError("No Rigidbody referenced in the script.");
+        if (!rb) Debug.LogWarning("No Rigidbody referenced.");
     }
 
     private void Start()

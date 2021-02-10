@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class ThirdPersonHandler : MonoBehaviour
@@ -22,9 +21,9 @@ public class ThirdPersonHandler : MonoBehaviour
 
     private void Awake()
     {
-        if (!animator) Debug.LogError("No Animator referenced.");
-        if (!mainCamera) Debug.LogError("No Camera referenced.");
-        if (!rb) Debug.LogError("No Rigidbody referenced.");
+        if (!animator) Debug.LogWarning("No Animator referenced.");
+        if (!mainCamera) Debug.LogWarning("No Camera referenced.");
+        if (!rb) Debug.LogWarning("No Rigidbody referenced.");
     }
 
     private void Update()
