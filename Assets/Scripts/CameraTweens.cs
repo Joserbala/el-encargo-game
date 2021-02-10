@@ -16,6 +16,7 @@ public class CameraTweens : MonoBehaviour
 
     public void SetThirdPersonPosition()
     {
-
+        transform.parent = secondTransform;
+        transform.DOLocalMove(Vector3.zero, 1).Play();
     }
 }

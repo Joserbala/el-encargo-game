@@ -3,10 +3,10 @@
 public class CameraFollowerFalling : MonoBehaviour
 {
 
-    [SerializeField] private float fallingSpeed = 3;
+    [SerializeField] private IntVariableSO fallingSpeed;
 
     private void LateUpdate()
     {
-        transform.Translate(Time.deltaTime * fallingSpeed * transform.right);
+        transform.Translate(Time.deltaTime * fallingSpeed.Value * transform.right);
     }
 }
