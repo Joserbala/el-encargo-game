@@ -66,11 +66,11 @@ public class ThirdPersonHandler : MonoBehaviour
         }
     }
 
-    public void SetInitialTransform()
+    public void PrepareThirdPerson()
     {
         transform.DOMove(initialTransform.position, 2).Play();
         transform.DORotate(initialTransform.rotation.eulerAngles, 2).Play();
 
-        this.enabled = true;
+        rb.useGravity = true;
     }
 }

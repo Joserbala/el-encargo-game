@@ -2,7 +2,7 @@
 
 public class GameManager : MonoBehaviour
 {
-    public bool gameIsPaused;
+    public static bool gameIsPaused;
 
     private void Update()
     {
@@ -19,11 +19,15 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             AudioListener.pause = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             Time.timeScale = 1;
             AudioListener.pause = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }

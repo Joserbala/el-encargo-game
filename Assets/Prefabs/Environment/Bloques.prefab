@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7548984133113954606}
   - component: {fileID: 3803171718743205482}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Collider 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7548984133113954606
 Transform:
@@ -59,11 +59,11 @@ GameObject:
   - component: {fileID: 4961293459024394072}
   - component: {fileID: 4961293459024394075}
   m_Layer: 0
-  m_Name: Blocks
+  m_Name: Bloques
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4961293459122713296
 Transform:
@@ -184,11 +184,11 @@ GameObject:
   - component: {fileID: 4793951562967153069}
   - component: {fileID: 3084215883346727612}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Collider 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4793951562967153069
 Transform:

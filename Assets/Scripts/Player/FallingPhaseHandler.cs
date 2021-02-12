@@ -52,7 +52,7 @@ public class FallingPhaseHandler : MonoBehaviour
         rb.MovePosition(Time.deltaTime * fallingSpeed.Value * transform.forward + rb.position);
     }
 
-    public void PrepareStartFalling()
+    public void PrepareFallingPhase()
     {
         transform.DOMove(startT.position, 2).Play();
         transform.DORotate(startT.rotation.eulerAngles, 2).Play();

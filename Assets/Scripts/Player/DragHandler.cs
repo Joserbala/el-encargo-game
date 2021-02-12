@@ -26,7 +26,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         startPosition = transform.position;
-        Debug.Log("OnBeginDrag");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -34,7 +33,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = objPosition;
-        Debug.Log("OnDrag");
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -45,12 +43,11 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
         else
         {
-            DoEndDragFalling();
+            DoEndDrag();
         }
-        Debug.Log("OnEndDrag");
     }
 
-    private void DoEndDragFalling()
+    private void DoEndDrag()
     {
         prepareFallingPhase?.Invoke();
 

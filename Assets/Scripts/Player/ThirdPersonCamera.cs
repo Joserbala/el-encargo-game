@@ -17,12 +17,6 @@ public class ThirdPersonCamera : MonoBehaviour
         if (!head) Debug.LogWarning("No Transform for head referenced.");
     }
 
-    private void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     private void LateUpdate()
     {
         DoRotate();

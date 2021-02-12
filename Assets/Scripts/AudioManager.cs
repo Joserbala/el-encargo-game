@@ -10,24 +10,16 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-
-        if (audioManager)
+        for (int i = 0; i < sounds.Count; i++)
         {
-            audioManager = this;
+            sounds[i].source = gameObject.AddComponent<AudioSource>();
 
-            foreach (var sound in sounds)
-            {
-                sound.source = gameObject.AddComponent<AudioSource>();
-
-                sound.source.clip = sound.clip;
-                sound.source.loop = sound.loop;
-                sound.source.outputAudioMixerGroup = sound.group;
-                sound.source.pitch = sound.pitch;
-                sound.source.volume = sound.volume;
-            }
+            sounds[i].source.clip = sounds[i].clip;
+            sounds[i].source.loop = sounds[i].loop;
+            sounds[i].source.outputAudioMixerGroup = sounds[i].group;
+            sounds[i].source.pitch = sounds[i].pitch;
+            sounds[i].source.volume = sounds[i].volume;
         }
-        else
-            Destroy(gameObject);
     }
 
     public void Play(string name, bool isMusic)
