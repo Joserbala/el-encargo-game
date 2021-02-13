@@ -6,6 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
 
     [SerializeField] private bool isChasing = false;
+    [SerializeField] private bool hasCollidedWSafeZone = false;
     [SerializeField] private bool hasArrivedToWaypoint = false;
     [SerializeField] private float speed = 5;
     [SerializeField] private float speedChasing = 8;
@@ -20,11 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Collider[] chaseArray;
     private Collider[] detectionArray;
 
-    public void DoNotChase()
-    {
-        Debug.Log("Debería dejar de perseguir...");
-        isChasing = false;
-    }
+    public bool HasCollidedWSafeZone { get => hasCollidedWSafeZone; set => hasCollidedWSafeZone = value; }
 
     private void OnDrawGizmos()
     {
@@ -40,11 +37,11 @@ public class EnemyBehaviour : MonoBehaviour
         detectionArray = Physics.OverlapSphere(transform.position, distanceCheck, playerLayerMask);
         chaseArray = Physics.OverlapSphere(transform.position, distanceStop, playerLayerMask);
 
-        if (!isChasing && detectionArray.Length > 0)
+        if (!isChasing && detectionArray.Length > 0 && !hasCollidedWSafeZone)
         {
             isChasing = true;
         }
-        else if (isChasing && chaseArray.Length > 0)
+        else if (isChasing && chaseArray.Length > 0 && !hasCollidedWSafeZone)
         {
             transform.LookAt(chaseArray[0].transform);
             transform.Translate(Vector3.forward * speedChasing * Time.deltaTime);
@@ -67,6 +64,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (Vector3.Distance(transform.position, waypoints[currentWaypointsIndex]) < 0.5)
             {
                 hasArrivedToWaypoint = true;
+                hasCollidedWSafeZone = false;
             }
         }
         else

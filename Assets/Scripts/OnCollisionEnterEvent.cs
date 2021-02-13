@@ -5,9 +5,5 @@ public class OnCollisionEnterEvent : MonoBehaviour
 {
     [SerializeField] private UnityEvent onCollisionEnter;
 
-    private void OnCollisionEnter(Collision other)
-    {
-        onCollisionEnter?.Invoke();
-        Debug.Log("Hello");
-    }
+    private void OnCollisionEnter(Collision other) => onCollisionEnter?.Invoke();
 }
