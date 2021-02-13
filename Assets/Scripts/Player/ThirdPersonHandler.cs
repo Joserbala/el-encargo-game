@@ -107,11 +107,7 @@ public class ThirdPersonHandler : MonoBehaviour
         transform.DOMove(lastTransform.position, timeToDeactivateEndGame).Play();
         transform.DORotate(lastTransform.rotation.eulerAngles, timeToDeactivateEndGame).Play();
 
-        Invoke(nameof(DisableThis), timeToDeactivateEndGame);
-    }
-
-    private void DisableThis()
-    {
+        animator.SetBool(animBoolWalking, true);
         this.enabled = false;
     }
 
