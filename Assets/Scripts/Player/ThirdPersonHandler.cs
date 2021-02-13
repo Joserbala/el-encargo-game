@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ThirdPersonHandler : MonoBehaviour
 {
@@ -13,18 +14,27 @@ public class ThirdPersonHandler : MonoBehaviour
 
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float rotationSpeed = 5;
+    [SerializeField] private string animBoolWalking = "IsWalking";
+    [SerializeField] private string animTriggerDie = "Die";
+    [SerializeField] private string animTriggerResucitate = "Resucitate";
     [SerializeField] private string hAxis = "Horizontal";
     [SerializeField] private string vAxis = "Vertical";
     [SerializeField] private Animator animator;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Collider coll;
+    [SerializeField] private IntVariableSO reviveTime;
+    [SerializeField] private IntVariableSO timeToEnable;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform initialTransform;
+    [SerializeField] private UnityEvent onDie;
+    [SerializeField] private UnityEvent onRevive;
 
     private void Awake()
     {
         if (!animator) Debug.LogWarning("No Animator referenced.");
         if (!mainCamera) Debug.LogWarning("No Camera referenced.");
         if (!rb) Debug.LogWarning("No Rigidbody referenced.");
+        if (!coll) Debug.LogWarning(("No Collider referenced."));
     }
 
     private void Update()
@@ -59,11 +69,11 @@ public class ThirdPersonHandler : MonoBehaviour
     {
         if (hValue != 0 || vValue != 0)
         {
-            animator.SetBool("IsWalking", true);
+            animator.SetBool(animBoolWalking, true);
         }
         else
         {
-            animator.SetBool("IsWalking", false);
+            animator.SetBool(animBoolWalking, false);
         }
     }
 
@@ -86,8 +96,36 @@ public class ThirdPersonHandler : MonoBehaviour
         transform.DOMove(initialTransform.position, 2).Play();
         transform.DORotate(initialTransform.rotation.eulerAngles, 2).Play();
 
-        animator.SetBool("IsWalking", false);
+        animator.SetBool(animBoolWalking, false);
 
         rb.useGravity = true;
     }
+
+    public void DoDying()
+    {
+        this.coll.enabled = false;
+        this.enabled = false;
+        this.animator.SetTrigger(animTriggerDie);
+        this.rb.useGravity = false;
+
+        onDie?.Invoke();
+
+        Invoke(nameof(Revive), reviveTime.Value);
+    }
+
+    private void Revive()
+    {
+        onRevive?.Invoke();
+
+        transform.position = initialTransform.position;
+
+        this.animator.SetTrigger(animTriggerResucitate);
+        this.coll.enabled = true;
+        this.rb.useGravity = true;
+
+        Invoke(nameof(EnableThis), timeToEnable.Value);
+    }
+
+    private void EnableThis() => this.enabled = true;
+
 }

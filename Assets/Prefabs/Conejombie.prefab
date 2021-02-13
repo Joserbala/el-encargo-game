@@ -169,7 +169,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5331014794183372533}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1e+9
   m_Drag: 0
   m_AngularDrag: 1000
   m_UseGravity: 1
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChasing: 0
+  hasCollidedWSafeZone: 0
   hasArrivedToWaypoint: 0
   speed: 8
   speedChasing: 9

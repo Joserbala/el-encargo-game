@@ -6,7 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
 
     [SerializeField] private bool isChasing = false;
-    [SerializeField] private bool hasCollidedWSafeZone = false;
+    [SerializeField] private bool stopChasing = false;
     [SerializeField] private bool hasArrivedToWaypoint = false;
     [SerializeField] private float speed = 5;
     [SerializeField] private float speedChasing = 8;
@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Collider[] chaseArray;
     private Collider[] detectionArray;
 
-    public bool HasCollidedWSafeZone { get => hasCollidedWSafeZone; set => hasCollidedWSafeZone = value; }
+    public bool HasCollidedWSafeZone { get => stopChasing; set => stopChasing = value; }
 
     private void OnDrawGizmos()
     {
@@ -37,11 +37,11 @@ public class EnemyBehaviour : MonoBehaviour
         detectionArray = Physics.OverlapSphere(transform.position, distanceCheck, playerLayerMask);
         chaseArray = Physics.OverlapSphere(transform.position, distanceStop, playerLayerMask);
 
-        if (!isChasing && detectionArray.Length > 0 && !hasCollidedWSafeZone)
+        if (!isChasing && detectionArray.Length > 0 && !stopChasing)
         {
             isChasing = true;
         }
-        else if (isChasing && chaseArray.Length > 0 && !hasCollidedWSafeZone)
+        else if (isChasing && chaseArray.Length > 0 && !stopChasing)
         {
             transform.LookAt(chaseArray[0].transform);
             transform.Translate(Vector3.forward * speedChasing * Time.deltaTime);
@@ -57,19 +57,17 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (!hasArrivedToWaypoint)
         {
-            Debug.Log("Going to the next waypoint: " + currentWaypointsIndex);
             transform.LookAt(waypoints[currentWaypointsIndex]);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, waypoints[currentWaypointsIndex]) < 0.5)
             {
                 hasArrivedToWaypoint = true;
-                hasCollidedWSafeZone = false;
+                stopChasing = false;
             }
         }
         else
         {
-            Debug.Log("Changing waypoint: " + currentWaypointsIndex);
             UpdateWaypointsIndex();
             hasArrivedToWaypoint = false;
         }
@@ -85,8 +83,15 @@ public class EnemyBehaviour : MonoBehaviour
         {
             currentWaypointsIndex = 0;
         }
+    }
 
-        Debug.Log("Waypoint updated to " + currentWaypointsIndex);
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.TryGetComponent<ThirdPersonHandler>(out ThirdPersonHandler controller))
+        {
+            controller.DoDying();
+            stopChasing = true;
+        }
     }
 
     [ContextMenu("Add a waypoint here")]
