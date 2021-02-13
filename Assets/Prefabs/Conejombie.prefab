@@ -190,10 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isChasing: 0
-  hasCollidedWSafeZone: 0
+  stopChasing: 0
   hasArrivedToWaypoint: 0
-  speed: 8
-  speedChasing: 9
+  speed: 6
+  speedChasing: 7
   distanceCheck: 3
   distanceStop: 8
   animator: {fileID: 5331014794176077183}

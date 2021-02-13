@@ -326,7 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16482a68b6e1e8543a8b138f0f6e165a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallingPhaseHandler: {fileID: -6001606506780797717}
+  timeToStopWalking: 0.5
+  animBoolWalking: IsWalking
+  animator: {fileID: 3827300344119637234}
   rb: {fileID: 3196716132613973747}
   prepareFallingPhase:
     m_PersistentCalls:
@@ -409,8 +411,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853d9ca4914779941906797b26f13d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  rotationSpeed: 5
+  movementSpeed: 8
+  rotationSpeed: 8
+  animBoolWalking: IsWalking
+  animTriggerDie: Die
+  animTriggerResucitate: Resucitate
   hAxis: Horizontal
   vAxis: Vertical
   animator: {fileID: 3827300344119637234}

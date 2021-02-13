@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -21,7 +20,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Collider[] chaseArray;
     private Collider[] detectionArray;
 
-    public bool HasCollidedWSafeZone { get => stopChasing; set => stopChasing = value; }
+    public bool HasCollidedWSafeZone { set => stopChasing = value; }
 
     private void OnDrawGizmos()
     {
