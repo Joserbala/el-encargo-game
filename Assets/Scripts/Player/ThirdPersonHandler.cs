@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class ThirdPersonHandler : MonoBehaviour
@@ -47,9 +48,23 @@ public class ThirdPersonHandler : MonoBehaviour
     {
         movementVector = new Vector3(hValue, 0, vValue).normalized;
 
+        UpdateAnimator();
+
         movementVector = Quaternion.Euler(0, mainCamera.transform.eulerAngles.y, 0) * movementVector;
 
         rb.MovePosition(Time.deltaTime * movementSpeed * movementVector + rb.position);
+    }
+
+    private void UpdateAnimator()
+    {
+        if (hValue != 0 || vValue != 0)
+        {
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
     }
 
     private void DoRotate()
@@ -70,6 +85,8 @@ public class ThirdPersonHandler : MonoBehaviour
     {
         transform.DOMove(initialTransform.position, 2).Play();
         transform.DORotate(initialTransform.rotation.eulerAngles, 2).Play();
+
+        animator.SetBool("IsWalking", false);
 
         rb.useGravity = true;
     }

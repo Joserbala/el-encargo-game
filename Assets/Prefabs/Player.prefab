@@ -23,9 +23,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3069436415611474528}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.401, y: 0.685, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.520667, y: 0.15482542, z: -0.1042182, w: 0.8331108}
+  m_LocalPosition: {x: 0.13499832, y: 0.48811543, z: -0.10446882}
+  m_LocalScale: {x: 1.0000002, y: 1.0000005, z: 1.0000002}
   m_Children:
   - {fileID: 3721038664405732756}
   m_Father: {fileID: 3827300344110373698}
@@ -55,8 +55,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3827300344110139184}
-  m_LocalRotation: {x: 0.44829786, y: 0.44829786, z: -0.5468355, w: 0.5468355}
-  m_LocalPosition: {x: 0.40252617, y: 0.26910257, z: -0.1804804}
+  m_LocalRotation: {x: 0.44867015, y: 0.44867015, z: -0.5465301, w: 0.5465301}
+  m_LocalPosition: {x: 0.2849083, y: 0.2603085, z: -0.20409632}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3827300344110373698}
@@ -136,9 +136,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3827300344110139188}
-  m_LocalRotation: {x: 0.0000000481159, y: -0, z: -0.0000000037596717, w: 1}
-  m_LocalPosition: {x: 0.40252614, y: 0.30680856, z: 0.74257517}
-  m_LocalScale: {x: 1.0000001, y: 1.0000002, z: 1}
+  m_LocalRotation: {x: 0.00068098295, y: -0, z: -0, w: 0.99999976}
+  m_LocalPosition: {x: 0.2849083, y: 0.29675734, z: 0.71901006}
+  m_LocalScale: {x: 1.0000004, y: 1.0000001, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 3827300344110373698}
   m_RootOrder: 1
@@ -275,7 +275,7 @@ Animator:
   m_GameObject: {fileID: 3827300344110139260}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8360fd2187b2ccf4e910cb292f55710e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -295,9 +295,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.2058223
+  m_Height: 1.2917196
   m_Direction: 1
-  m_Center: {x: 0.27999997, y: 0.6690869, z: 4.2632608e-16}
+  m_Center: {x: 0.27999997, y: 0.62613827, z: 4.2632608e-16}
 --- !u!54 &3196716132613973747
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -358,6 +358,7 @@ MonoBehaviour:
   fallingSpeed: {fileID: 11400000, guid: fc93180e716c60147ac2a41a17483093, type: 2}
   horizontalAxis: Horizontal
   verticalAxis: Vertical
+  animator: {fileID: 3827300344119637234}
   rb: {fileID: 3196716132613973747}
   startT: {fileID: 0}
   prepareStartFalling:

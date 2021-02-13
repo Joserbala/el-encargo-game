@@ -20,6 +20,12 @@ public class EnemyBehaviour : MonoBehaviour
     private Collider[] chaseArray;
     private Collider[] detectionArray;
 
+    public void DoNotChase()
+    {
+        Debug.Log("Debería dejar de perseguir...");
+        isChasing = false;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

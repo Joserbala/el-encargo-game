@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class EndFallingTrigger : MonoBehaviour
+public class OnTriggerEnterEvent : MonoBehaviour
 {
 
     [SerializeField] private UnityEvent onTriggerEnter;

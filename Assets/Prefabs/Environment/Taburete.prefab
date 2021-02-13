@@ -11,14 +11,13 @@ GameObject:
   - component: {fileID: 5380114696086412627}
   - component: {fileID: 5380114696087182707}
   - component: {fileID: 5380114696088313779}
-  - component: {fileID: 5380114696093315763}
   - component: {fileID: 5380114696086013905}
   - component: {fileID: 5380114696086013904}
   - component: {fileID: 5380114696086013911}
   - component: {fileID: 5380114696086013910}
   - component: {fileID: 5380114696086013909}
   m_Layer: 0
-  m_Name: Stool
+  m_Name: Taburete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5380114696086045043}
-  m_LocalRotation: {x: 0, y: -0.46174863, z: -0, w: 0.8870109}
+  m_LocalRotation: {x: 0, y: -0.46174863, z: 0, w: 0.8870109}
   m_LocalPosition: {x: 45.8, y: -105.45, z: 4.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -55.000004, z: 0}
 --- !u!33 &5380114696087182707
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -85,25 +84,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &5380114696093315763
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5380114696086045043}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 29339104c7d69b346a4f1585f2be81d8, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!136 &5380114696086013905
 CapsuleCollider:
   m_ObjectHideFlags: 0

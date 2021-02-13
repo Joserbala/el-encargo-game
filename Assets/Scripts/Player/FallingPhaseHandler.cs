@@ -15,6 +15,7 @@ public class FallingPhaseHandler : MonoBehaviour
     [SerializeField] private IntVariableSO fallingSpeed;
     [SerializeField] private string horizontalAxis = "Horizontal";
     [SerializeField] private string verticalAxis = "Vertical";
+    [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform startT;
     [SerializeField] private UnityEvent prepareStartFalling;
@@ -58,6 +59,8 @@ public class FallingPhaseHandler : MonoBehaviour
         transform.DORotate(startT.rotation.eulerAngles, 2).Play();
 
         prepareStartFalling?.Invoke();
+
+        animator.SetBool("IsWalking", true);
 
         this.enabled = true;
     }
