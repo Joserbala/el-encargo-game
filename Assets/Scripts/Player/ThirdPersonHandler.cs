@@ -11,6 +11,7 @@ public class ThirdPersonHandler : MonoBehaviour
     private Vector3 rotationVector;
     private Quaternion rotationQuaternion;
 
+    [SerializeField] private float timeToDeactivateEndGame = 2;
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float rotationSpeed = 5;
     [SerializeField] private string animBoolWalking = "IsWalking";
@@ -25,6 +26,7 @@ public class ThirdPersonHandler : MonoBehaviour
     [SerializeField] private IntVariableSO timeToEnable;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform initialTransform;
+    [SerializeField] private Transform lastTransform;
     [SerializeField] private UnityEvent onDie;
     [SerializeField] private UnityEvent onRevive;
 
@@ -98,6 +100,19 @@ public class ThirdPersonHandler : MonoBehaviour
         animator.SetBool(animBoolWalking, false);
 
         rb.useGravity = true;
+    }
+
+    public void ExecuteLastPosition()
+    {
+        transform.DOMove(lastTransform.position, timeToDeactivateEndGame).Play();
+        transform.DORotate(lastTransform.rotation.eulerAngles, timeToDeactivateEndGame).Play();
+
+        Invoke(nameof(DisableThis), timeToDeactivateEndGame);
+    }
+
+    private void DisableThis()
+    {
+        this.enabled = false;
     }
 
     public void DoDying()
