@@ -14,6 +14,7 @@ public class ReloadSceneOnClick : MonoBehaviour, IPointerClickHandler, IPointerE
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AudioListener.pause = false;
         Time.timeScale = 1;
+        EnemyBehaviour.canPlay = false; // static variables are put to the original value when loading a scene!
         audioManager.Play(trackClick);
     }
 

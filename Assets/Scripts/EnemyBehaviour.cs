@@ -4,6 +4,8 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
 
+    public static bool canPlay = false;
+
     [SerializeField] private bool isChasing = false;
     [SerializeField] private bool stopChasing = false;
     [SerializeField] private bool hasArrivedToWaypoint = false;
@@ -12,6 +14,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float distanceCheck = 2;
     [SerializeField] private float distanceStop = 3;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip zombieSound;
+    [SerializeField] private AudioSource attackAS;
+    [SerializeField] private AudioSource zombieSoundAS;
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private List<Vector3> waypoints;
     [SerializeField] private Rigidbody rb;
@@ -22,6 +27,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     public bool HasCollidedWSafeZone { set => stopChasing = value; }
 
+    /// <summary>
+    /// Because canPlay is static, to be updated via UnityEvent it has to be updated via method.
+    /// </summary>
+    public void UpdateCanPlay() => canPlay = true;
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -31,11 +41,26 @@ public class EnemyBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, distanceStop);
     }
 
+    private void Start()
+    {
+        InvokeRepeating(nameof(TryPlayZombieSound), 5, Random.Range(3f, 5f));
+    }
+
     private void Update()
+    {
+        CheckSpheres();
+
+        DoMove();
+    }
+
+    private void CheckSpheres()
     {
         detectionArray = Physics.OverlapSphere(transform.position, distanceCheck, playerLayerMask);
         chaseArray = Physics.OverlapSphere(transform.position, distanceStop, playerLayerMask);
+    }
 
+    private void DoMove()
+    {
         if (!isChasing && detectionArray.Length > 0 && !stopChasing)
         {
             isChasing = true;
@@ -49,6 +74,15 @@ public class EnemyBehaviour : MonoBehaviour
         {
             isChasing = false;
             GoToNextWaypoint();
+        }
+    }
+
+    private void TryPlayZombieSound()
+    {
+        if (canPlay && !zombieSoundAS.isPlaying)
+        {
+            zombieSoundAS.pitch = Random.Range(.8f, 1.2f);
+            zombieSoundAS.PlayOneShot(zombieSound);
         }
     }
 
@@ -90,6 +124,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             controller.DoDying();
             stopChasing = true;
+            attackAS.Play();
         }
     }
 

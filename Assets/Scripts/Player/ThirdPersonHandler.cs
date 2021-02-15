@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class ThirdPersonHandler : MonoBehaviour
 {
 
+    private bool isDying = false;
+    private bool isOnTheground = false; // Whether has landed or not on the ground of the last part of the game
     private float hValue;
     private float vValue;
     private Vector3 movementVector;
@@ -20,6 +22,8 @@ public class ThirdPersonHandler : MonoBehaviour
     [SerializeField] private string hAxis = "Horizontal";
     [SerializeField] private string vAxis = "Vertical";
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip walkingSounds;
+    [SerializeField] private AudioSource characterAS;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Collider coll;
     [SerializeField] private IntVariableSO reviveTime;
@@ -36,17 +40,38 @@ public class ThirdPersonHandler : MonoBehaviour
         if (!mainCamera) Debug.LogWarning("No Camera referenced.");
         if (!rb) Debug.LogWarning("No Rigidbody referenced.");
         if (!coll) Debug.LogWarning(("No Collider referenced."));
+        if (!walkingSounds) Debug.LogWarning("No walking sounds have been referenced.");
+    }
+
+    private void Start()
+    {
+        characterAS.volume = .5f;
     }
 
     private void Update()
     {
-        GetInputs();
+        if (!isOnTheground)
+            CheckGround();
+        else if (!isDying)
+            GetInputs();
+    }
+
+    /// <summary>
+    /// Updates isOnTheGround to start or not updating the movement and animations.
+    /// </summary>
+    private void CheckGround()
+    {
+        if (transform.position.y < -105.4f)
+            isOnTheground = true;
     }
 
     private void FixedUpdate()
     {
-        DoMove();
-        DoRotate();
+        if (!isDying && isOnTheground)
+        {
+            DoMove();
+            DoRotate();
+        }
     }
 
     private void GetInputs()
@@ -59,22 +84,29 @@ public class ThirdPersonHandler : MonoBehaviour
     {
         movementVector = new Vector3(hValue, 0, vValue).normalized;
 
-        UpdateAnimator();
+        UpdateAnimatorAndSounds();
 
         movementVector = Quaternion.Euler(0, mainCamera.transform.eulerAngles.y, 0) * movementVector;
 
         rb.MovePosition(Time.deltaTime * movementSpeed * movementVector + rb.position);
     }
 
-    private void UpdateAnimator()
+    private void UpdateAnimatorAndSounds()
     {
-        if (hValue != 0 || vValue != 0)
+        if ((hValue != 0 || vValue != 0))
         {
             animator.SetBool(animBoolWalking, true);
+
+            if (!characterAS.isPlaying)
+            {
+                characterAS.pitch = Random.Range(.8f, 1.2f);
+                characterAS.PlayOneShot(walkingSounds);
+            }
         }
         else
         {
             animator.SetBool(animBoolWalking, false);
+            characterAS.Stop();
         }
     }
 
@@ -117,6 +149,7 @@ public class ThirdPersonHandler : MonoBehaviour
         this.enabled = false;
         this.animator.SetTrigger(animTriggerDie);
         this.rb.useGravity = false;
+        this.isDying = true;
 
         onDie?.Invoke();
 
@@ -132,6 +165,7 @@ public class ThirdPersonHandler : MonoBehaviour
         this.animator.SetTrigger(animTriggerResucitate);
         this.coll.enabled = true;
         this.rb.useGravity = true;
+        this.isDying = false;
 
         Invoke(nameof(EnableThis), timeToEnable.Value);
     }

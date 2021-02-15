@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler
 {
+    private bool isDragging = false;
     private float distance;
     private Vector3 mousePosition;
     private Vector3 objPosition;
@@ -13,6 +14,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [SerializeField] private float timeToStopWalking = .5f;
     [SerializeField] private string animBoolWalking = "IsWalking";
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioClip onMouseOverSound;
+    [SerializeField] private AudioSource playerAS;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private UnityEvent prepareFallingPhase;
 
@@ -23,17 +26,20 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void Start()
     {
+        playerAS.volume = .4f;
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // TODO: play sound
+        if (!isDragging)
+            playerAS.PlayOneShot(onMouseOverSound);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         startPosition = transform.position;
+        isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -60,6 +66,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private void StopWalking()
     {
         this.animator.SetBool(animBoolWalking, false);
+        isDragging = false;
     }
 
     private void DoStartFalling()

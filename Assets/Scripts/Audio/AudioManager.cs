@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AudioManager : MonoBehaviour
 {
@@ -29,5 +30,22 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Sound " + name + " not found.");
         else
             sound.source.Play();
+    }
+
+    public void Stop(string name)
+    {
+        Sound sound;
+
+        sound = sounds.Find(s => s.soundName == name);
+
+        if (sound == null)
+            Debug.LogError("Sound " + name + " not found.");
+        else
+        {
+            Sequence fadeOut = DOTween.Sequence();
+            fadeOut.Append(sound.source.DOFade(0, 1));
+            fadeOut.AppendCallback(() => sound.source.Stop());
+            fadeOut.Play();
+        }
     }
 }
