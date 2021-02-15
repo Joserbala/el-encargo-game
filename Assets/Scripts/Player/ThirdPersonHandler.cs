@@ -129,6 +129,10 @@ public class ThirdPersonHandler : MonoBehaviour
         transform.DOMove(initialTransform.position, 2).Play();
         transform.DORotate(initialTransform.rotation.eulerAngles, 2).Play();
 
+        RenderSettings.fogMode = FogMode.Linear;
+        RenderSettings.fogStartDistance = 1;
+        RenderSettings.fogEndDistance = 30;
+
         animator.SetBool(animBoolWalking, false);
 
         rb.useGravity = true;

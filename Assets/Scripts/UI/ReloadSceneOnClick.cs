@@ -11,6 +11,10 @@ public class ReloadSceneOnClick : MonoBehaviour, IPointerClickHandler, IPointerE
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        RenderSettings.fogMode = FogMode.Linear;
+        RenderSettings.fogStartDistance = 1;
+        RenderSettings.fogEndDistance = 30;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AudioListener.pause = false;
         Time.timeScale = 1;

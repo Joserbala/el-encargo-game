@@ -58,6 +58,9 @@ public class FallingPhaseHandler : MonoBehaviour
         transform.DOMove(startT.position, 2).Play();
         transform.DORotate(startT.rotation.eulerAngles, 2).Play();
 
+        RenderSettings.fogMode = FogMode.Exponential;
+        RenderSettings.fogDensity = 0.05f;
+
         prepareStartFalling?.Invoke();
 
         animator.SetBool("IsWalking", true);
