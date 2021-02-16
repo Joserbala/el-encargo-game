@@ -8,7 +8,7 @@ public class OnTriggerEnterEventPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<ThirdPersonHandler>(out ThirdPersonHandler controller))
+        if (other.GetComponent<ThirdPersonHandler>())
         {
             onTriggerEnter?.Invoke();
         }

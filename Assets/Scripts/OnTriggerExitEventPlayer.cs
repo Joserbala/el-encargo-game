@@ -8,7 +8,7 @@ public class OnTriggerExitEventPlayer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent<ThirdPersonHandler>(out ThirdPersonHandler controller))
+        if (other.gameObject.GetComponent<ThirdPersonHandler>())
         {
             onTriggerExit?.Invoke();
         }
